@@ -1,8 +1,9 @@
 # MyHash*
 ###### *not secure in ANY way*
 ```
-MyHash()
->> e>vlK:Ic"Y$6^JeE
+>> MyHash()
+ans = 
+    'e>vlK:Ic"Y$6^JeE'
 ```
 
 ### Why
