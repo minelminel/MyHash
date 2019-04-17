@@ -5,6 +5,10 @@
 ans = 
     'e>vlK:Ic"Y$6^JeE'
 ```
+### Make sure you have this utility function in your dir
+```
+https://github.com/minelminel/col2row.git
+```
 
 ### Why
 I created this for use within web development as a test function for SQL input escaping, as depending on certain adjustable factors, some *very nasty* ascii symbols can be outputted. If your forms can appropriately handle these types of strings, consider yourself *somewhat* relieved.
