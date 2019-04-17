@@ -33,7 +33,6 @@ Hash uses a comically impractical implementation of an S-table in the form of a 
 ```
 
 ### Mechanism
--
 A traditional SHA architecture is employed, where input blocks are structured in a fixed length with padding agnostically inserted.
 
 ### Recipes
