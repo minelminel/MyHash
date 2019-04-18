@@ -3,9 +3,8 @@ function H = MyHash(stuff,BlockSize)
 % *** ONLY USE FOR FUN ***
 % H = MyHash(stuff,BlockSize)
 % RETURNS HASH OF TYPE char ... DEFAULT LENGTH = 16
-% tic
 switch nargin
-    case 0 % HASH SIGNATURE
+    case 0 % NO ARG -> TREAT AS EMPTY STRING
         stuff = '';
         BlockSize = 16;
     case 1
@@ -29,7 +28,7 @@ rawHash = MerkleDamgard(Hexa,Stored,BlockSize);
 % FINISHING FUNCTION
 H = finalizehash(rawHash);
 
-% ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ %
+
 % ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ FUNCTIONS ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ %
     function s = StuffToString(stuff)
         switch class(stuff)
@@ -50,7 +49,6 @@ H = finalizehash(rawHash);
     end
 
     function hexstring = pepper(s,BlockSize)  %%%%% BOTTLENECK %%%%%
-        % % % % load 'PrimeGapList.csv';
         % compute imporant variables
         obs = round(power(pi*log10(length(s)+1),2))+BlockSize;  % OBSCURING FACTOR
         padlen = abs(BlockSize - mod(obs,BlockSize)); % PAD LENGTH
@@ -74,7 +72,6 @@ H = finalizehash(rawHash);
         % combine the pepper array with s
         endindex = mod(length(fullpad)+length(dec2hex(s)),BlockSize*2); %..rly length
         hexstring = [ x(1:end-(2*endindex))   y];
-        % hexstring = [fullpad(1:end-endindex) dec2hex(s)] % prev.
         % check to make sure final pad is perfect length
         if mod(length(hexstring),BlockSize*2)
             disp('ERROR IN HEX PAD CREATION');
@@ -139,7 +136,6 @@ H = finalizehash(rawHash);
         end
 
         % folding function
-        % folding =
         while any(lt(h,32))
             for i = 1:length(h)
                 if lt(h(i),64)
@@ -158,17 +154,13 @@ H = finalizehash(rawHash);
             end
         end
 
-        % replace restricted number
+        % replace restricted number(s), since the output is agnostic of
+        % ascii equivalent of integers. We obviously want to omit anything below 31
+        % as these are system calls, as well as any characters that may cause fatal errors.
         if ~isempty(find(NotAllowed==h))
             h(find(NotAllowed==h)) = 111;
         end
-
         H = char(uint8(h));
-        % h = UI8 + (str2num(num2str(lt(UI8,33)))*33)
-        % hII = UI8smooth + (str2num(num2str(lt(UI8smooth,33)))*33)
-
-        % H = char(round(smoothdata(uint8(stored))));
-        % [uint8(Stored).' round(smoothdata(uint8(Stored))).'];
     end
 
     function Stored = InitStored(Hexa,BlockSize)
@@ -182,5 +174,5 @@ H = finalizehash(rawHash);
         end
         row;
     end
-% toc
 end
+% end of script
