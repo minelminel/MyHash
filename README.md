@@ -1,4 +1,4 @@
-# MyHash*
+# MyHash* :closed_lock_with_key:
 ###### *not secure in ANY way*
 ```
 >> MyHash()
