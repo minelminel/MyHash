@@ -1,6 +1,6 @@
 function H = MyHash(stuff,BlockSize)
 % *** NOT FOR PRODUCTION USE ***
-% *** ONLY USE FOR COLLISION HUNTING ***
+% *** ONLY USE FOR FUN ***
 % H = MyHash(stuff,BlockSize)
 % RETURNS HASH OF TYPE char ... DEFAULT LENGTH = 16
 % tic
